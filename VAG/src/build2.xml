@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="VAG" default="compile-servlet" basedir=".">
+
+  <!-- include compiled-servlet and tomcat-dir properties -->
+  <property file="global.properties" /><path id="servlet-classpath">
+    <fileset dir="${tomcat.dir}/common/lib">
+        <include name="*.jar" />
+    </fileset>
+    <fileset dir="${tomcat.dir}/common/endorsed">
+        <include name="*.jar" />
+    </fileset>
+</path>
+
+<target name="compile-servlet">
+    <echo message="Compiling the servlet...."/>
+    <javac srcdir="." destdir="metadata">
+        <include name="${compiled.servlet}.java" />
+                <classpath refid="servlet-classpath"/>
+    </javac>
+</target>
+
+
+ 
+<ear destfile="./myapp.ear" appxml="./main/webapp/WEB-INF/web.xml">
+  <fileset dir="." includes="*.jar,*.war"/>
+</ear>
+
+</project>
+
+
